@@ -1,5 +1,5 @@
 ---
-title: "rnaCountSeb"
+title: "ALSCellAtlas"
 author: "Marta Trusohamn"
 output: word_document
 
@@ -23,9 +23,12 @@ rm(list=ls())
 #wd = "C:/Users/mlecz_000/Desktop/sebastian/expression"
 #wd = ("C:/Users/Marta/Desktop/Sebastian/expression")
 #wd <- "C:/Users/martal1/ownCloud/Desktop/sebastian/expression"
-wd = "C:/Users/Marta/Documents/sebastian"
+#wd = "C:/Users/Marta/Documents/sebastian"
+wd <- "E:/Dropbox/Sebastian/alscellatlas_data"
 
 ```
+
+
 
 ```{r dataLoad1, echo=FALSE, include=FALSE, eval = TRUE}
 setwd(wd)
@@ -153,13 +156,29 @@ df <-subset(df, Tissue=="AH")
 
 ```{r dataLoad3, echo=FALSE, include=FALSE, eval = TRUE} 
 setwd(wd)
-df2 <- read.csv("GSE18597_data_firstName.csv")
+#df2 <- read.csv("GSE18597_data_firstName.csv")
+
+#######new Data!!###################
+df2<- read.csv("mouse_data_for_seb from Nathan.csv")
+colnames_oldData <- colnames(read.csv(file="GSE18597_data_firstName.csv",nrows=1))
+
+##check if the colnames are ok
+# colnames_newData <- colnames(newData)
+# x <- 1:length(newData)
+# for (i in x) {
+#   print(colnames_newData[i])
+#   print(colnames_oldData[i])
+# }
+colnames(df2) <- colnames_oldData
+####################################
+
 ###name of 1 column -> NAME
 names(df2)[1]<-paste("NAME")
 
 ###check for duplicates
-#n_occur <-  data.frame(table(df2$NAME))
-#duplic_genes<-n_occur[n_occur$Freq > 1,]
+n_occur <-  data.frame(table(df2$NAME))
+duplic_genes<-n_occur[n_occur$Freq > 1,]
+#write.csv(duplic_genes, file = "oldMouseData_duplicates.csv")
 
 ###remove the second occurance
 df2<-df2[!duplicated(df2$NAME),]
@@ -195,7 +214,6 @@ arrangeDf2 <- function(df2){
 df2 <- arrangeDf2(df2)
 
 ```
-
 
 
 ```{r loadPlots, echo=FALSE, dpi=300, fig.width=5, fig.height=8, dev.args=list(pointsize=16)}
