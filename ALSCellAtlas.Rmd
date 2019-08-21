@@ -56,7 +56,7 @@ myFullData$level1class <- factor(myFullData$level1class,
 ###rename some of cell types
 library(plyr)
 myFullData$level1class <- revalue(myFullData$level1class, 
-                                  c("Vascular and Leptomeningeal Cells"="VLMC", 
+                                  c("Vascular and Leptomeningeal Cells"="PVF", 
                                     "Vascular Smooth Muscle Cell"="vSMC",
                                     "Vascular Endothelial"="Endothelium",
                                     "Oligodendrocyte Precursor"="OPC"))
