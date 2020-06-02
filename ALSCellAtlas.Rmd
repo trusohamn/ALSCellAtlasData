@@ -15,16 +15,12 @@ output: word_document
 #devtools::install_github("kassambara/ggpubr")
 #install.packages("ggpubr")
 #install.packages("gridGraphics")
+#install.packages("devtools")
 ```
 
 ```{r setup, eval=FALSE, include=FALSE}
 rm(list=ls()) 
-# wd = "C:/Users/Marta/Desktop/sebastian/expression"
-#wd = "C:/Users/mlecz_000/Desktop/sebastian/expression"
-#wd = ("C:/Users/Marta/Desktop/Sebastian/expression")
-#wd <- "C:/Users/martal1/ownCloud/Desktop/sebastian/expression"
-#wd = "C:/Users/Marta/Documents/sebastian"
-wd <- "E:/Dropbox/Sebastian/alscellatlas_data"
+wd <- "/home/marta/Dropbox/Sebastian/alscellatlas_data"
 
 ```
 
@@ -433,10 +429,11 @@ setwd(wd)
 #renames<- read.csv("mouse_human_one_to_one.csv")
 
 #####new rename########
-library(devtools)
+#library(devtools)
 #install_github("nathanskene/One2one")
 #install.packages("rlang")
 #install.packages("tibble")
+#install.packages("dplyr")
 library(One2One)
 library(rlang)
 library(dplyr)
@@ -494,7 +491,7 @@ generateGraphFile <- function(gen){
     dev.off()
 }
 
-wdForGraphs <- "C:/Users/Marta/Desktop/als_graphs"
+wdForGraphs <- "/home/marta/Github/ALSCellAtlasData/exGraphs"
 setwd(wdForGraphs)
 
 lay <- rbind(c(1,1,4,2,4,3),
