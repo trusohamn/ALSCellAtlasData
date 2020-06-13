@@ -337,7 +337,7 @@ plot2<-function(gen){
     ggtitle("")+
     labs(subtitle=("Mouse SOD1 (G93A)"))+
     theme(panel.background = element_rect(fill='white', colour='white'),
-          legend.position="right",legend.title=element_blank(),
+          legend.position="bottom",legend.title=element_blank(),
           axis.line.y = element_line(colour="grey85"), axis.title.y=element_text(colour="grey45"), 
           axis.text.y = element_text(colour="grey45"), axis.ticks.y = element_line(colour="grey45"),
           axis.text.x=element_text(colour="grey45"), axis.ticks.x = element_line(colour="grey45"), 
@@ -372,7 +372,7 @@ plot2b<-function(gen){
     ggtitle("")+
     labs(subtitle=("Mouse TDP43"))+
     theme(panel.background = element_rect(fill='white', colour='white'),
-          legend.position="right",legend.title=element_blank(),
+          legend.position="none",legend.title=element_blank(),
           axis.line.y = element_line(colour="grey85"), axis.title.y=element_text(colour="grey45"), 
           axis.text.y = element_text(colour="grey45"), axis.ticks.y = element_line(colour="grey45"),
           axis.text.x=element_text(colour="grey45"), axis.ticks.x = element_line(colour="grey45"), 
@@ -559,7 +559,7 @@ generateGraphFile <- function(gen){
     
     filename = tolower(filename)
     png(file=paste0(filename, ".png"), res=325, width=2500, height = 1750) 
-    grid.arrange(p1, p2,p2b, p3, layout_matrix = lay, widths= c(4,4,2,12,12,0,6), heights= c(8,1))
+    grid.arrange(p1, p2,p2b, p3, layout_matrix = lay, widths= c(4,4,2,10,5,2,6), heights= c(8,1))
     dev.off()
 }
 
@@ -567,11 +567,11 @@ wdForGraphs <- "/home/marta/Github/ALSCellAtlasData/exGraphs"
 setwd(wdForGraphs)
 
 lay <- rbind(c(1,1,5,2,3,5,4),
-             c(1,1,5,6,5,5,6))
+             c(1,1,5,2,5,5,6))
 library(gridExtra)
 
-#genes <- c("Prn")
-genes <- colnames(myFullData)[(5:7)] 
+genes <- c("Aif1", "Spp1")
+#genes <- colnames(myFullData)[(5:7)] 
 #genes <- colnames(myFullData)[-(1:20980)] 
 
 lapply(genes, generateGraphFile)
