@@ -55,7 +55,8 @@ myFullData$level1class <- revalue(myFullData$level1class,
                                   c("Vascular and Leptomeningeal Cells"="PVF", 
                                     "Vascular Smooth Muscle Cell"="vSMC",
                                     "Vascular Endothelial"="Endothelium",
-                                    "Oligodendrocyte Precursor"="OPC"))
+                                    "Oligodendrocyte Precursor"="OPC",
+                                    "Pyramidal Neurons"="Excitatory Neurons"))
 ```
 
 ```{r dataLoad1CB, echo=FALSE, include=FALSE, eval = TRUE}
@@ -290,7 +291,7 @@ plot1 <- function(gen, dataset = myFullData, color=color10){
     xlab("")+
     ylab("RNA count per cell")+
     ggtitle(gen)+
-    labs(subtitle=("Cell type specific expression"))
+    labs(subtitle=("mRNA Specificity"))
 }
 
 ##############
@@ -358,15 +359,15 @@ plot2b<-function(gen){
   ds <- data_summary(temp, varname="gen", groupnames=c("Genotype", "Month"))
   
   ggplot(temp, aes_string(x=factor(temp$Month, c("5", "20")), y="gen") ) + 
-    #geom_line(size=1.5) +
-    geom_boxplot(aes(fill=Genotype, color=Genotype), varwidth=TRUE, position = position_dodge(width=0),
+    geom_boxplot(aes(fill=Genotype, color=Genotype), varwidth=TRUE,
                  alpha=0.5)+
     scale_fill_manual(values=color)+
     scale_alpha_manual(values = avals) +
     scale_colour_manual(values = avalsHex)+
-    stat_summary(aes(group=Genotype),geom = "crossbar", width=1, fatten=0, size=0.75, color="white", 
+    stat_summary(aes(group=Genotype),geom = "crossbar", width=0.8, fatten=0, size=0.75, color="white",
+                 position = position_dodge(width = 0.8),
                  fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) })+
-    geom_jitter(aes(color=Genotype ), size=1, alpha=0.9, position = position_jitter(width = 0))+
+    geom_jitter(aes(color=Genotype ), size=1, alpha=0.9, position=position_jitterdodge(dodge.width=0.5))+
     ylab("RNA expression levels")+
     xlab("Month")+
     ggtitle("")+
@@ -559,7 +560,7 @@ generateGraphFile <- function(gen){
     
     filename = tolower(filename)
     png(file=paste0(filename, ".png"), res=325, width=2500, height = 1750) 
-    grid.arrange(p1, p2,p2b, p3, layout_matrix = lay, widths= c(4,4,2,10,5,2,6), heights= c(8,1))
+    grid.arrange(p1, p2,p2b, p3, layout_matrix = lay, widths= c(4,4,2,10,6,1,7), heights= c(8,1))
     dev.off()
 }
 
