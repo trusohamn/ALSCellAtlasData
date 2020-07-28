@@ -104,9 +104,9 @@ myFullData2 <- myFullData2[!is.na(myFullData2$level1class),]
 
 ```{r dataLoad2, echo=FALSE, include=FALSE, eval = TRUE} 
 setwd(wd)
-
 ###load data
-df <- read.csv("GSE18920_for_R_wGeneNames (no log2).csv")
+#df <- read.csv("GSE18920_for_R_wGeneNames (no log2).csv")
+df <- read.table("log2/GSE18920_extended_for_R_wGeneNames.txt", header=TRUE)
 
 ###show gene duplicates
 # n_occur <-  data.frame(table(df$NAME))
@@ -157,7 +157,8 @@ setwd(wd)
 #df2 <- read.csv("GSE18597_data_firstName.csv")
 
 #######new Data!!###################
-df2<- read.csv("mouse_data_for_seb from Nathan.csv")
+# df2<- read.csv("mouse_data_for_seb from Nathan.csv")
+df2 <- read.csv("log2/SOD1mouse_data_log2.csv")
 colnames_oldData <- colnames(read.csv(file="GSE18597_data_firstName.csv",nrows=1))
 
 ##check if the colnames are ok
@@ -216,7 +217,8 @@ df2 <- arrangeDf2(df2)
 ```{r dataLoad4, echo=FALSE, include=FALSE, eval = TRUE} 
 setwd(wd)
 
-dfmouse2<- read.table("TDP43_data.txt")
+# dfmouse2<- read.table("TDP43_data.txt")
+dfmouse2 <- read.csv("log2/TDP_43_data_log2.csv")
 
 ###remove the second occurance
 dfmouse2<-dfmouse2[!duplicated(dfmouse2$Gene),]
@@ -333,7 +335,7 @@ plot2<-function(gen){
     stat_summary(aes(group=Genotype),geom = "crossbar", width=1, fatten=0, size=0.75, color="white", 
                  fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) })+
     geom_jitter(aes(color=Genotype ), size=1, alpha=0.9, position = position_jitter(width = 0))+
-    ylab("RNA expression levels")+
+    ylab("RNA expression log2")+
     xlab("Day")+
     ggtitle("")+
     labs(subtitle=("Mouse SOD1 (G93A)"))+
@@ -368,7 +370,7 @@ plot2b<-function(gen){
                  position = position_dodge(width = 0.8),
                  fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) })+
     geom_jitter(aes(color=Genotype ), size=1, alpha=0.9, position=position_jitterdodge(dodge.width=0.5))+
-    ylab("RNA expression levels")+
+    ylab("RNA expression log2")+
     xlab("Month")+
     ggtitle("")+
     labs(subtitle=("Mouse TDP43"))+
@@ -405,7 +407,7 @@ plot3 <- function(gen){
                  fun.data = function(x){ return(c(y=median(x), ymin=median(x), ymax=median(x))) })+
     geom_jitter(aes(group=Phen, color=Phen), size=1, alpha=0.9, position = position_jitter(width = .05))+
     xlab(" ")+
-    ylab("RNA expression levels")+
+    ylab("RNA expression log2")+
     ggtitle("")+
     labs(subtitle=("Human ALS"))+
     theme(panel.background = element_rect(fill='white', colour='white'),
@@ -479,11 +481,12 @@ empty <- ggplot() + geom_point(aes(1, 1), colour = "white") +
 ```
 
 ```{r printForSingleGene, echo=FALSE}
-gen="Ccl11"
+gen="Tspan12"
 #homolog <- as.character(renames[match(gen,renames$mouse), "human"])
 print(plot1(gen, myFullData, color10))
 
 print(plot2(gen))
+print(plot2b(gen))
 print(plot3(gen))
 print(plot3_withName(toupper(gen)))
 ```
@@ -560,7 +563,7 @@ generateGraphFile <- function(gen){
     
     filename = tolower(filename)
     png(file=paste0(filename, ".png"), res=325, width=2500, height = 1750) 
-    grid.arrange(p1, p2,p2b, p3, layout_matrix = lay, widths= c(4,4,2,10,6,1,7), heights= c(8,1))
+    grid.arrange(p1, p2,p2b, p3, layout_matrix = lay, widths= c(4,4,0,10,6,1,7), heights= c(8,1))
     dev.off()
 }
 
