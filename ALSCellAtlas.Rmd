@@ -338,7 +338,7 @@ plot2<-function(gen){
     ylab("RNA expression log2")+
     xlab("Day")+
     ggtitle("")+
-    labs(subtitle=("Mouse SOD1 (G93A)"))+
+    labs(subtitle=("Mouse\nSOD1 (G93A)"))+
     theme(panel.background = element_rect(fill='white', colour='white'),
           legend.position="bottom",legend.title=element_blank(),
           axis.line.y = element_line(colour="grey85"), axis.title.y=element_text(colour="grey45"), 
@@ -373,7 +373,7 @@ plot2b<-function(gen){
     ylab("RNA expression log2")+
     xlab("Month")+
     ggtitle("")+
-    labs(subtitle=("Mouse TDP43"))+
+    labs(subtitle=("Mouse\nTARDBP (Q331K)"))+
     theme(panel.background = element_rect(fill='white', colour='white'),
           legend.position="none",legend.title=element_blank(),
           axis.line.y = element_line(colour="grey85"), axis.title.y=element_text(colour="grey45"), 
@@ -409,7 +409,7 @@ plot3 <- function(gen){
     xlab(" ")+
     ylab("RNA expression log2")+
     ggtitle("")+
-    labs(subtitle=("Human ALS"))+
+    labs(subtitle=("Human\nsALS"))+
     theme(panel.background = element_rect(fill='white', colour='white'),
           legend.position="none",legend.title=element_blank(),
           axis.line.y = element_line(colour="grey85"), 
@@ -449,7 +449,7 @@ plot3_withName <- function(gen){
     xlab(" ")+
     ylab("RNA expression levels")+
     ggtitle("")+
-    labs(title = gen, subtitle=("Human sALS"))+
+    labs(title = gen, subtitle=("Human\nsALS"))+
     theme(panel.background = element_rect(fill='white', colour='white'),
           legend.position="none",legend.title=element_blank(),
           axis.line.y = element_line(colour="grey85"), 
@@ -563,7 +563,7 @@ generateGraphFile <- function(gen){
     
     filename = tolower(filename)
     png(file=paste0(filename, ".png"), res=325, width=2500, height = 1750) 
-    grid.arrange(p1, p2,p2b, p3, layout_matrix = lay, widths= c(4,4,0,10,6,1,7), heights= c(8,1))
+    grid.arrange(p1, p2,p2b, p3, layout_matrix = lay, widths= c(4,4,0,10,6,2,7), heights= c(8,1))
     dev.off()
 }
 
