@@ -380,8 +380,7 @@ plot2b<-function(gen){
           axis.text.y = element_text(colour="grey45"), axis.ticks.y = element_line(colour="grey45"),
           axis.text.x=element_text(colour="grey45"), axis.ticks.x = element_line(colour="grey45"), 
           axis.line.x = element_line(colour="grey85"), axis.title.x=element_text(colour="grey45"),
-          legend.text = element_text(colour="grey45")) +
-    stat_summary(fun.y=mean, geom="smooth", aes(group=Genotype, color=Genotype))
+          legend.text = element_text(colour="grey45")) 
   
 }
 ###############
@@ -563,7 +562,7 @@ generateGraphFile <- function(gen){
     
     filename = tolower(filename)
     png(file=paste0(filename, ".png"), res=325, width=2500, height = 1750) 
-    grid.arrange(p1, p2,p2b, p3, layout_matrix = lay, widths= c(4,4,0,10,6,2,7), heights= c(8,1))
+    grid.arrange(p1, p2,p2b, p3, layout_matrix = lay, widths= c(4,4,0,10,8,0,7), heights= c(8,1))
     dev.off()
 }
 
@@ -574,8 +573,8 @@ lay <- rbind(c(1,1,5,2,3,5,4),
              c(1,1,5,2,5,5,6))
 library(gridExtra)
 
-genes <- c("Aif1", "Spp1")
-#genes <- colnames(myFullData)[(5:7)] 
+#genes <- c("Aif1", "Spp1")
+genes <- colnames(myFullData)[-(1:4)] 
 #genes <- colnames(myFullData)[-(1:20980)] 
 
 lapply(genes, generateGraphFile)
