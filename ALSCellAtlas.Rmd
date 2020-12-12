@@ -20,7 +20,7 @@ output: word_document
 
 ```{r setup, eval=FALSE, include=FALSE}
 rm(list=ls()) 
-wd <- "/home/marta/Dropbox/Sebastian/alscellatlas_data"
+wd <- "/home/marta/Desktop/Sebastian/alscellatlas_data"
 
 ```
 
@@ -158,16 +158,20 @@ setwd(wd)
 
 #######new Data!!###################
 # df2<- read.csv("mouse_data_for_seb from Nathan.csv")
-df2 <- read.csv("log2/SOD1mouse_data_log2.csv")
+df2 <- read.csv("SOD1_mouse_data_without_duplicates_07.12.20.csv")
+names(df2)[names(df2) == 'X'] <- 'Gene'
+df2$Probes..affy_mouse_430_2.=NULL
+
+# df2ForNames <- read.csv("log2/SOD1mouse_data_log2.csv")
 colnames_oldData <- colnames(read.csv(file="GSE18597_data_firstName.csv",nrows=1))
 
 ##check if the colnames are ok
-# colnames_newData <- colnames(newData)
-# x <- 1:length(newData)
+#  colnames_newData <- colnames(df2)
+#  x <- 1:length(df2)
 # for (i in x) {
-#   print(colnames_newData[i])
-#   print(colnames_oldData[i])
-# }
+#    print(colnames_newData[i])
+#    print(colnames_oldData[i])
+#  }
 colnames(df2) <- colnames_oldData
 ####################################
 
@@ -217,8 +221,9 @@ df2 <- arrangeDf2(df2)
 ```{r dataLoad4, echo=FALSE, include=FALSE, eval = TRUE} 
 setwd(wd)
 
-# dfmouse2<- read.table("TDP43_data.txt")
 dfmouse2 <- read.csv("log2/TDP_43_data_log2.csv")
+
+# dfmouse2<- read.table("TDP43_data.txt")
 
 ###remove the second occurance
 dfmouse2<-dfmouse2[!duplicated(dfmouse2$Gene),]
@@ -566,7 +571,7 @@ generateGraphFile <- function(gen){
     dev.off()
 }
 
-wdForGraphs <- "/home/marta/Github/ALSCellAtlasData/exGraphs"
+wdForGraphs <- "/home/marta/Desktop/Sebastian/exGraphs"
 setwd(wdForGraphs)
 
 lay <- rbind(c(1,1,5,2,3,5,4),
